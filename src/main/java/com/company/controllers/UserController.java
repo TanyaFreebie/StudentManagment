@@ -11,38 +11,39 @@ public class UserController {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
+    //table users
 
-// database tanya_project table users
     private static boolean addNewUser() {
-        System.out.println("Enter login: ");
+        System.out.println("New user registration");//Introduction
+
+        //ask user to provide username
+        System.out.println("Enter username: ");
         String login = scanner.next();
+
+        //Check if username is already taken
         try {
             ps = DbConnection.dbConn().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
 
             rs = ps.executeQuery();
 
-
-            //printout requested line
-            String loginT, passwordT;
-
-
-//            System.out.println("username\t password\t");//printout data for checking
             if (rs.next()) {
                 System.out.println("This username is taken. Try '" + login + "1'.");
                 return false;
 
             } else {
                 System.out.println("Username OK");
+
+                //ask user to provide password
                 System.out.println("Enter password: ");
-                String test = scanner.next();
+                String password1 = scanner.next();
 
                 System.out.println("Retype your password: ");
-                String password = scanner.next();
-
-                if(password.equals(test)){
+                String password2 = scanner.next();
+            //check if user is able to type password twice correctly
+                if(password1.equals(password2)){
                     try {
                         ps = DbConnection.dbConn().prepareStatement("INSERT INTO users(username, password)" +
-                                "VALUES ('" + login + "', '" + password + "')");
+                                "VALUES ('" + login + "', '" + password1 + "')");
 
                         ps.execute();
                         return true;
@@ -61,9 +62,9 @@ public class UserController {
             e.printStackTrace();
         }
 
-return true;
+    return true;
 
-    }//end of addNewUser
+    }
 
     public static void registerUser(){
         System.out.println(addNewUser() ? "Registration successful" : "Registration failed.");

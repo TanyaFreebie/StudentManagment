@@ -12,61 +12,46 @@ public class Login {
     private static Scanner scanner = new Scanner(System.in);
     private static PreparedStatement ps;
     private static ResultSet rs;
-    // database tanya_project table users
+    //table users
+
     public static void userLogin() {
-        //request data from user
-        System.out.println("Enter your login: ");
+        System.out.println("Sing in");//Welcome message
+
+        //request username from user
+        System.out.println("Enter your username: ");
         String login = scanner.next();
 
 
-        System.out.println("Enter your password: ");
-        String password = scanner.next();
-        //HARCODING
-//        String login = "admin";
-//        String password = "gfwugfue";
 
         try {
           ps = DbConnection.dbConn().prepareStatement("SELECT * FROM users WHERE username = '" + login + "';");
 
             rs = ps.executeQuery();
 
+            //set variable for validation
+            String  passwordCheck;
 
 
-            //printout requested line
-            String loginT, passwordT;
-
-
-//            System.out.println("username\t password\t");//printout data for checking
+         // Check if provided username exists in database
             if (rs.next()) {
                 System.out.println("Username excepted.");
-            } else {
-                System.out.println("Username doesn't exists");
-            }
 
-            while(rs.next()) {
+                //asking for password from user
+                System.out.println("Enter your password: ");
+                String password = scanner.next();
 
+                passwordCheck = rs.getString("password");
 
-//                loginT = rs.getString("username");// for printing data
-                passwordT = rs.getString("password");
-//                System.out.println(loginT + "\t " + passwordT + "\t ");//printout data for checking
-
-
-
-                    if (password.equals(passwordT)) {
+                //Check if password is correct
+                boolean correct = password.equals(passwordCheck);
+                if(correct) {
                         System.out.println("Access granted.");
                     } else {
                         System.out.println("Login failed. Check password");
                     }
-
-
-
-
-
-
-
-
-
-            }//end of line request
+                } else {
+                System.out.println("Username doesn't exists");
+            }
 
 
 
@@ -74,7 +59,7 @@ public class Login {
             e.printStackTrace();
 
         }
-    }//end of addNewUser
+    }
 
 
 

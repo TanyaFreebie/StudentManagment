@@ -20,11 +20,11 @@ public class Main {
 
         //Register new user
 
-        UserController.registerUser();
+//        UserController.registerUser();
 
         //Password check
 
-//        Login.userLogin();
+        Login.userLogin();
 
 
     }//End of main
