@@ -29,6 +29,7 @@ public class UserController {
 //            System.out.println("username\t password\t");//printout data for checking
             if (rs.next()) {
                 System.out.println("This username is taken. Try '" + login + "1'.");
+                return false;
 
             } else {
                 System.out.println("Username OK");
