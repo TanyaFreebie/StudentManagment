@@ -37,19 +37,32 @@ public class Login {
 
 
 //            System.out.println("username\t password\t");//printout data for checking
+            if (rs.next()) {
+                System.out.println("Username excepted.");
+            } else {
+                System.out.println("Username doesn't exists");
+            }
 
             while(rs.next()) {
 
 
-                loginT = rs.getString("username");// for printing data
+//                loginT = rs.getString("username");// for printing data
                 passwordT = rs.getString("password");
 //                System.out.println(loginT + "\t " + passwordT + "\t ");//printout data for checking
 
-                if(password.equals(passwordT)) {
-                    System.out.println("Access granted");
-                }else {
-                    System.out.println("Login failed. Check login/password");
-                }
+
+
+                    if (password.equals(passwordT)) {
+                        System.out.println("Access granted.");
+                    } else {
+                        System.out.println("Login failed. Check password");
+                    }
+
+
+
+
+
+
 
 
 

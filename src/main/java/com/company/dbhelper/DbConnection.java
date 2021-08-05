@@ -10,10 +10,10 @@ public class DbConnection {
 
         try {
             connection = DriverManager.getConnection(User.URL.getNb(), User.USER.getNb(), User.PASSWORD.getNb());
-            System.out.println("Database Connected Successfully.");
+            System.out.println("Connected to database.");
         } catch (
                 SQLException e) {
-//            System.out.println("Unable to connect to database");
+            System.out.println("Unable to connect to database");
             e.printStackTrace();
         }
         return connection;
