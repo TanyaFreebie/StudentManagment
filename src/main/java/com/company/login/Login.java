@@ -14,12 +14,13 @@ public class Login {
     private static ResultSet rs;
     //table users
 
+
     public static void userLogin() {
         System.out.println("Sing in");//Welcome message
 
         //request username from user
         System.out.println("Enter your username: ");
-        String login = scanner.next();
+        String login = scanner.next().trim();
 
 
 
@@ -38,7 +39,7 @@ public class Login {
 
                 //asking for password from user
                 System.out.println("Enter your password: ");
-                String password = scanner.next();
+                String password = scanner.next().trim();
 
                 passwordCheck = rs.getString("password");
 
@@ -51,6 +52,7 @@ public class Login {
                     }
                 } else {
                 System.out.println("Username doesn't exists");
+
             }
 
 
@@ -63,28 +65,5 @@ public class Login {
 
 
 
-    public  static void printTable()  {
-       try{
-           ps = DbConnection.dbConn().prepareStatement("SELECT * FROM users;");
-        rs = ps.executeQuery();
-        String login, password;
-        int id;
-
-        System.out.println("ID\t login\t password\t");
-
-        while(rs.next()) {
-            id = rs.getInt("id");
-            login = rs.getString("username");
-            password = rs.getString("password");
-
-            System.out.println(id + "\t " + login + "\t " + password + "\t ");
-        }
-
-
-    } catch (
-    SQLException e) {
-        e.printStackTrace();
-    }
-
     }//end of test
-}
+

@@ -18,7 +18,7 @@ public class UserController {
 
         //ask user to provide username
         System.out.println("Enter username: ");
-        String login = scanner.next();
+        String login = scanner.next().trim();
 
         //Check if username is already taken
         try {
@@ -35,10 +35,10 @@ public class UserController {
 
                 //ask user to provide password
                 System.out.println("Enter password: ");
-                String password1 = scanner.next();
+                String password1 = scanner.next().trim();
 
                 System.out.println("Retype your password: ");
-                String password2 = scanner.next();
+                String password2 = scanner.next().trim();
             //check if user is able to type password twice correctly
                 if(password1.equals(password2)){
                     try {

@@ -2,13 +2,17 @@ package com.company;
 
 import com.company.controllers.StudentController;
 import com.company.controllers.UserController;
+import com.company.dbhelper.DbConnection;
 import com.company.login.Login;
-
-
+import com.company.objects.Database;
 
 
 public class Main {
     public static void main(String[] args){
+        //check connection
+//        DbConnection.dbConn();
+
+//    StudentController.addNewStudent();
 
 
         //ternary operator
@@ -18,13 +22,20 @@ public class Main {
 
             // ====HOMETASK====
 
-        //Register new user
+        //***Register new user
 
-//        UserController.registerUser();
+//      UserController.registerUser();
 
-        //Password check
 
-        Login.userLogin();
+        //***Password check
+
+//        Login.userLogin();
+
+    // ***Check whole table
+//        Database.print();
+
+        //++++ClassTask++++
+        StudentController.addMarks();
 
 
     }//End of main

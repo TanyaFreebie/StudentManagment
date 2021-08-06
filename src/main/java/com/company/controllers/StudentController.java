@@ -74,4 +74,43 @@ public class StudentController {
 
 
     }
+////+++++ADD SCORE
+    public static void addMarks(){
+        System.out.println("Enter students id: ");
+        int id = scanner.nextInt();
+
+
+
+        try {
+
+            ps = DbConnection.dbConn().prepareStatement("SELECT * FROM students WHERE id = " + id);
+
+            rs = ps.executeQuery();
+
+
+
+
+            // Check if provided student exists in database
+            if (rs.next()) {
+                System.out.println("Student found.");
+
+                System.out.println("Enter Mathematics score: ");
+                int mathScore = scanner.nextInt();
+
+                System.out.println("Enter English score: ");
+                int englishScore = scanner.nextInt();
+                ps = DbConnection.dbConn().prepareStatement("INSERT INTO scores(student_id, Mathematics, English)" + " VALUES(" + id + ", " + mathScore + ", " + englishScore + ")");
+                ps.execute();
+
+                System.out.println("Score was updated");
+
+            } else {
+                System.out.println("Student doesn't exists. Check required students ID");
+            }
+
+            } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

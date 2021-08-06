@@ -9,7 +9,7 @@ public class DbConnection {
         Connection connection = null;
 
         try {
-            connection = DriverManager.getConnection(User.URL.getNb(), User.USER.getNb(), User.PASSWORD.getNb());
+            connection = DriverManager.getConnection(User.URL.getPc(), User.USER.getPc(), User.PASSWORD.getPc());
         } catch (
                 SQLException e) {
             System.out.println("Unable to connect to database");
