@@ -7,6 +7,7 @@ import com.company.objects.Student;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.Scanner;
 
 public class StudentController {
@@ -30,6 +31,7 @@ public class StudentController {
                     "VALUES ('" + name + "', " + age + ")");
 
             ps.execute();
+            System.out.println("successfully added to database");
             return true;
 
         } catch (Exception e) {
@@ -37,6 +39,58 @@ public class StudentController {
             return false;
         }
     }
+
+    public static boolean deleteStudent(){
+
+        int id = getStudentById().getId();
+
+        try {
+            ps = DbConnection.dbConn().prepareStatement("DELETE FROM students WHERE id = " + id);
+            ps.execute();
+
+            System.out.println("successfully removed to database");
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    public static boolean editStudent(){
+
+        int id = getStudentById().getId();
+
+        System.out.println("Name, age");
+        System.out.println("Which column you want to edit?");
+        String column = scanner.next().trim();
+
+        System.out.println("Enter changed data");
+        String update = scanner.next().trim();
+
+
+
+        try {
+            if( column.equals("name")){
+                ps = DbConnection.dbConn().prepareStatement("UPDATE students SET " + column + " = '"+ update +"' WHERE id =" + id);
+              ps.execute();}
+            else if( column.equals("age")){
+
+
+                ps = DbConnection.dbConn().prepareStatement("UPDATE students SET " + column + " = " + update + " WHERE id =" + id);
+                ps.execute();
+            } else {
+                System.out.println("Update failed. Please check data and try again.");
+            }
+
+            System.out.println("successfully updated");
+            return true;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
 
     public static Student getStudentById(){
 
@@ -59,8 +113,10 @@ public class StudentController {
                 student.setId(studentID);
                 student.setName(name);
                 student.setAge(age);
+                System.out.println(studentID + "\t " + name + "\t " + age + "\t ");
             }
             return student;
+
 
 
 
@@ -74,43 +130,6 @@ public class StudentController {
 
 
     }
-////+++++ADD SCORE
-    public static void addMarks(){
-        System.out.println("Enter students id: ");
-        int id = scanner.nextInt();
 
-
-
-        try {
-
-            ps = DbConnection.dbConn().prepareStatement("SELECT * FROM students WHERE id = " + id);
-
-            rs = ps.executeQuery();
-
-
-
-
-            // Check if provided student exists in database
-            if (rs.next()) {
-                System.out.println("Student found.");
-
-                System.out.println("Enter Mathematics score: ");
-                int mathScore = scanner.nextInt();
-
-                System.out.println("Enter English score: ");
-                int englishScore = scanner.nextInt();
-                ps = DbConnection.dbConn().prepareStatement("INSERT INTO scores(student_id, Mathematics, English)" + " VALUES(" + id + ", " + mathScore + ", " + englishScore + ")");
-                ps.execute();
-
-                System.out.println("Score was updated");
-
-            } else {
-                System.out.println("Student doesn't exists. Check required students ID");
-            }
-
-            } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    }
 
 }
